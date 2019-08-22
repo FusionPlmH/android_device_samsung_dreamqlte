@@ -14,5 +14,5 @@
 # limitations under the License.
 #
 
-
-PRODUCT_MAKEFILES := $(LOCAL_DIR)/omni_dreamqlte.mk
+PRODUCT_MAKEFILES := \
+	$(LOCAL_DIR)/omni_dreamqlte.mk

@@ -5,7 +5,7 @@ PRODUCT_RELEASE_NAME := dreamqlte
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk) 
 
 # Inherit some common Lineage stuff.
-$(call inherit-product, vendor/omni/config/common.mk)
+# $(call inherit-product, vendor/omni/config/common.mk)
 
 
 PRODUCT_PACKAGES += \
