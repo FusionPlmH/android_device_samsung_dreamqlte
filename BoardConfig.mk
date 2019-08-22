@@ -2,20 +2,21 @@ DEVICE_TREE := device/samsung/dreamqlte
 LOCAL_PATH := device/samsung/dreamqlte
 
 ANDROID_COMPILE_WITH_JACK:= false
-
+# TARGET_KERNEL_CONFIG := dream2qlte_chn_open_defconfig
+TARGET_OTA_ASSERT_DEVICE := dream2qlte
 
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := kryo
+TARGET_CPU_VARIANT := generic
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := kryo
+TARGET_2ND_CPU_VARIANT := cortex-a53
 
 
 ENABLE_CPUSETS := true
@@ -31,8 +32,11 @@ BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET := 0x02000000
-TARGET_PREBUILT_KERNEL := device/samsung/dreamqlte/kernel
-
+TARGET_PREBUILT_KERNEL := device/samsung/dreamqlte/Image.gz-dtb
+# TARGET_KERNEL_SOURCE := kernel/samsung/msm8998
+TARGET_KERNEL_APPEND_DTB := true
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8998
@@ -50,9 +54,10 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-
+BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
 
 # TWRP
+TW_DEVICE_VERSION := $(shell date -u +"%Y%m%d")
 RECOVERY_VARIANT := twrp
 TW_DEFAULT_LANGUAGE := zh_CN
 TW_THEME := portrait_hdpi
@@ -61,20 +66,25 @@ RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 36500
+TW_MAX_BRIGHTNESS := 25500
 TW_DEFAULT_BRIGHTNESS := 7000
 TW_NO_REBOOT_BOOTLOADER := true
 TW_HAS_DOWNLOAD_MODE := true
-TW_INCLUDE_NTFS_3G := true
+# TW_INCLUDE_NTFS_3G := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXTRA_LANGUAGES := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_UNIFIED_DEVICE := true
 ALLOW_MISSING_DEPENDENCIES := true
-TARGET_RECOVERY_FSTAB := device/samsung/dreamqlte/recovery.fstab
+# TARGET_RECOVERY_FSTAB := device/samsung/dreamqlte/recovery.fstab
 TW_MTP_DEVICE := /dev/mtp_usb
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file"
 TW_NO_HAPTICS := true
 # system.prop
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
+TW_NO_LEGACY_PROPS := true
+
+# encryption
+TW_INCLUDE_FBE := true
+TW_INCLUDE_CRYPTO := true
