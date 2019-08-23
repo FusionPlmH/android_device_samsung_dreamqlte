@@ -1,9 +1,4 @@
-DEVICE_TREE := device/samsung/dreamqlte
-LOCAL_PATH := device/samsung/dreamqlte
-
-# ANDROID_COMPILE_WITH_JACK:= false
-# TARGET_KERNEL_CONFIG := dream2qlte_chn_open_defconfig
-TARGET_OTA_ASSERT_DEVICE := dream2qlte
+TARGET_OTA_ASSERT_DEVICE := dreamqlte
 
 # Architecture
 TARGET_ARCH := arm64
@@ -34,8 +29,7 @@ BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET := 0x02000000
 TARGET_PREBUILT_KERNEL := device/samsung/dreamqlte/kernel
 TARGET_KERNEL_APPEND_DTB := true
-# TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-# BOARD_CUSTOM_BOOTIMG_MK := device/samsung/dreamqlte/mkbootimg.mk
+
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8998
@@ -56,6 +50,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
 
 # TWRP
+TW_EXCLUDE_TWRPAPP := false
 TW_DEVICE_VERSION := $(shell date -u +"%Y%m%d")
 RECOVERY_VARIANT := twrp
 TW_DEFAULT_LANGUAGE := zh_CN
@@ -76,10 +71,11 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_UNIFIED_DEVICE := true
 ALLOW_MISSING_DEPENDENCIES := true
 TW_MTP_DEVICE := /dev/mtp_usb
+TARGET_RECOVERY_FSTAB := device/samsung/dreamqlte/recovery/root/etc/recovery.fstab
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file"
 TW_NO_HAPTICS := true
 # system.prop
-TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+TARGET_SYSTEM_PROP := device/samsung/dreamqlte/system.prop
 
 TW_NO_LEGACY_PROPS := true
 
